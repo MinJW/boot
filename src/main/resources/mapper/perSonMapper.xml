@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mjw.dao.PersonDao" >
+
+    <insert id="addPerson" useGeneratedKeys="true" keyProperty="id" parameterType="com.mjw.bean.Person">
+        INSERT INTO person
+        (name,age)
+        VALUES
+        (#{name}, #{age})
+    </insert>
+
+    <select id="getPerson" resultType="person">
+        SELECT id,name,age FROM person
+    </select>
+
+    <insert id="addPersons" useGeneratedKeys="true" parameterType="java.util.List">
+        INSERT INTO person
+        (name,age)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            ( #{item.name},#{item.age} )
+        </foreach>
+    </insert>
+
+
+</mapper>
